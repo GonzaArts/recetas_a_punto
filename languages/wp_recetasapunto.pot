@@ -1,0 +1,62 @@
+msgid "Recetas"
+msgstr ""
+
+msgid "Receta"
+msgstr ""
+
+msgid "Gestor de Recetas"
+msgstr ""
+
+msgid "Añadir Nueva"
+msgstr ""
+
+msgid "Añadir Nueva Receta"
+msgstr ""
+
+msgid "Nueva Receta"
+msgstr ""
+
+msgid "Editar Receta"
+msgstr ""
+
+msgid "Ver Receta"
+msgstr ""
+
+msgid "Todas las Recetas"
+msgstr ""
+
+msgid "Buscar Recetas"
+msgstr ""
+
+msgid "No se encontraron recetas."
+msgstr ""
+
+msgid "No se encontraron recetas en la papelera."
+msgstr ""
+
+msgid "Comensales"
+msgstr ""
+
+msgid "Tiempo"
+msgstr ""
+
+msgid "Tipo de Comida"
+msgstr ""
+
+msgid "Dificultad"
+msgstr ""
+
+msgid "Baja"
+msgstr ""
+
+msgid "Media"
+msgstr ""
+
+msgid "Alta"
+msgstr ""
+
+msgid "Ingredientes"
+msgstr ""
+
+msgid "Utensilios"
+msgstr ""
