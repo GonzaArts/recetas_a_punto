@@ -11,8 +11,15 @@ function wp_recetasapunto_shortcode($atts) {
     $time = get_post_meta($post_id, '_receta_time', true);
     $type = get_post_meta($post_id, '_receta_type', true);
     $difficulty = get_post_meta($post_id, '_receta_difficulty', true);
-    $ingredients = get_post_meta($post_id, '_receta_ingredients', true);
-    $tools = get_post_meta($post_id, '_receta_tools', true);
+    $ingredients = get_post_meta($post_id, '_receta_ingredients', true) ?: [];
+    $tools = get_post_meta($post_id, '_receta_tools', true) ?: [];
+
+    if (!is_array($ingredients)) {
+        $ingredients = [];
+    }
+    if (!is_array($tools)) {
+        $tools = [];
+    }
 
     ob_start();
     ?>
@@ -27,8 +34,7 @@ function wp_recetasapunto_shortcode($atts) {
             <h3><?php _e('Ingredientes', 'wp_recetasapunto'); ?></h3>
             <ul class="receta-list">
                 <?php 
-                $ingredient_array = explode(",", $ingredients);
-                foreach ($ingredient_array as $ingredient) {
+                foreach ($ingredients as $ingredient) {
                     echo '<li><input type="checkbox"> ' . esc_html($ingredient) . '</li>';
                 }
                 ?>
@@ -38,8 +44,7 @@ function wp_recetasapunto_shortcode($atts) {
             <h3><?php _e('Utensilios', 'wp_recetasapunto'); ?></h3>
             <ul class="receta-list">
                 <?php 
-                $tool_array = explode(",", $tools);
-                foreach ($tool_array as $tool) {
+                foreach ($tools as $tool) {
                     echo '<li><input type="checkbox"> ' . esc_html($tool) . '</li>';
                 }
                 ?>
