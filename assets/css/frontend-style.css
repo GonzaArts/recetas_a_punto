@@ -10,7 +10,7 @@
 
 .receta-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
@@ -57,8 +57,46 @@
 }
 
 .receta-list input[type="checkbox"] {
-    margin-right: 10px;
-    accent-color: #0073aa; /* Cambia el color del check */
+    display: none;
+}
+
+.receta-list input[type="checkbox"] + label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    
+}
+
+.receta-list input[type="checkbox"] + label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #0073aa;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+
+.receta-list input[type="checkbox"]:checked + label::before {
+    background-color: #0073aa;
+    border-color: #0073aa;
+}
+
+.receta-list input[type="checkbox"]:checked + label::after {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 5px;
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 }
 
 .receta-list li.checked {
@@ -80,17 +118,6 @@
 
 .receta-section ul {
     padding-left: 20px;
-}
-
-.receta-list li::before {
-    content: "•";
-    margin-right: 5px;
-    color: #0073aa;
-}
-
-.receta-list input[type="checkbox"]::before {
-    content: "";
-    margin-right: 0;
 }
 
 /* Responsive adjustments */

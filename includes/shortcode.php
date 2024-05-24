@@ -35,7 +35,7 @@ function wp_recetasapunto_shortcode($atts) {
             <ul class="receta-list">
                 <?php 
                 foreach ($ingredients as $ingredient) {
-                    echo '<li><input type="checkbox"> ' . esc_html($ingredient) . '</li>';
+                    echo '<li><input type="checkbox" id="ingredient-' . esc_attr($ingredient) . '"><label for="ingredient-' . esc_attr($ingredient) . '">' . esc_html($ingredient) . '</label></li>';
                 }
                 ?>
             </ul>
@@ -45,7 +45,7 @@ function wp_recetasapunto_shortcode($atts) {
             <ul class="receta-list">
                 <?php 
                 foreach ($tools as $tool) {
-                    echo '<li><input type="checkbox"> ' . esc_html($tool) . '</li>';
+                    echo '<li><input type="checkbox" id="tool-' . esc_attr($tool) . '"><label for="tool-' . esc_attr($tool) . '">' . esc_html($tool) . '</label></li>';
                 }
                 ?>
             </ul>
