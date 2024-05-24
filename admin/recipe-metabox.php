@@ -4,7 +4,7 @@ function wp_recetasapunto_add_meta_box() {
         'wp_recetasapunto',
         __('Detalles de la Receta', 'wp_recetasapunto'),
         'wp_recetasapunto_meta_box_callback',
-        'avada_portfolio', // Asegúrate de que este sea el slug correcto para el tipo de post de Avada
+        'avada_portfolio',
         'normal',
         'high'
     );
@@ -16,8 +16,16 @@ function wp_recetasapunto_meta_box_callback($post) {
     $time = get_post_meta($post->ID, '_receta_time', true);
     $type = get_post_meta($post->ID, '_receta_type', true);
     $difficulty = get_post_meta($post->ID, '_receta_difficulty', true);
-    $ingredients = get_post_meta($post->ID, '_receta_ingredients', true);
-    $tools = get_post_meta($post->ID, '_receta_tools', true);
+    $ingredients = get_post_meta($post->ID, '_receta_ingredients', true) ?: [];
+    $tools = get_post_meta($post->ID, '_receta_tools', true) ?: [];
+
+    // Ensure we have arrays
+    if (!is_array($ingredients)) {
+        $ingredients = [];
+    }
+    if (!is_array($tools)) {
+        $tools = [];
+    }
 
     wp_nonce_field('wp_recetasapunto_save_meta_box_data', 'wp_recetasapunto_meta_box_nonce');
 
@@ -58,14 +66,11 @@ function wp_recetasapunto_meta_box_callback($post) {
     echo '<button type="button" id="add-ingredient" class="button button-primary" style="padding: 10px 15px; background-color: #0073aa; color: #fff; border: none; border-radius: 3px; cursor: pointer; font-size: 14px;">' . __('Añadir', 'wp_recetasapunto') . '</button>';
     echo '</div>';
     echo '<ul id="ingredient-list" class="tag-list">';
-    if (!empty($ingredients)) {
-        $ingredient_array = explode(",", $ingredients);
-        foreach ($ingredient_array as $ingredient) {
-            echo '<li style="display: inline-block; padding: 5px 10px; margin: 5px; background-color: #f1f1f1; border: 1px solid #ccc; border-radius: 3px; position: relative;">' . esc_html($ingredient) . ' <span class="remove-ingredient tag-remove" style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%); color: red; cursor: pointer; margin-left: 10px;">x</span></li>';
-        }
+    foreach ($ingredients as $ingredient) {
+        echo '<li style="display: inline-block; padding: 5px 10px; margin: 5px; background-color: #f1f1f1; border: 1px solid #ccc; border-radius: 3px; position: relative;">' . esc_html($ingredient) . ' <span class="remove-ingredient tag-remove" style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%); color: red; cursor: pointer; margin-left: 10px;">x</span></li>';
     }
     echo '</ul>';
-    echo '<input type="hidden" id="receta_ingredients" name="receta_ingredients" value="' . esc_attr($ingredients) . '" />';
+    echo '<input type="hidden" id="receta_ingredients" name="receta_ingredients" value="' . esc_attr(json_encode($ingredients)) . '" />';
 
     echo '<label for="receta_tools">' . __('Utensilios', 'wp_recetasapunto') . '</label>';
     echo '<div class="input-group" style="display: flex; align-items: center; margin-bottom: 15px;">';
@@ -73,14 +78,11 @@ function wp_recetasapunto_meta_box_callback($post) {
     echo '<button type="button" id="add-tool" class="button button-primary" style="padding: 10px 15px; background-color: #0073aa; color: #fff; border: none; border-radius: 3px; cursor: pointer; font-size: 14px;">' . __('Añadir', 'wp_recetasapunto') . '</button>';
     echo '</div>';
     echo '<ul id="tool-list" class="tag-list">';
-    if (!empty($tools)) {
-        $tool_array = explode(",", $tools);
-        foreach ($tool_array as $tool) {
-            echo '<li style="display: inline-block; padding: 5px 10px; margin: 5px; background-color: #f1f1f1; border: 1px solid #ccc; border-radius: 3px; position: relative;">' . esc_html($tool) . ' <span class="remove-tool tag-remove" style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%); color: red; cursor: pointer; margin-left: 10px;">x</span></li>';
-        }
+    foreach ($tools as $tool) {
+        echo '<li style="display: inline-block; padding: 5px 10px; margin: 5px; background-color: #f1f1f1; border: 1px solid #ccc; border-radius: 3px; position: relative;">' . esc_html($tool) . ' <span class="remove-tool tag-remove" style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%); color: red; cursor: pointer; margin-left: 10px;">x</span></li>';
     }
     echo '</ul>';
-    echo '<input type="hidden" id="receta_tools" name="receta_tools" value="' . esc_attr($tools) . '" />';
+    echo '<input type="hidden" id="receta_tools" name="receta_tools" value="' . esc_attr(json_encode($tools)) . '" />';
 
     echo '</div>';
 }
@@ -98,16 +100,31 @@ function wp_recetasapunto_save_meta_box_data($post_id) {
         return;
     }
 
-    $fields = array('receta_servings', 'receta_time', 'receta_type', 'receta_difficulty', 'receta_ingredients', 'receta_tools');
+    $fields = array('receta_servings', 'receta_time', 'receta_type', 'receta_difficulty');
     foreach ($fields as $field) {
         if (isset($_POST[$field])) {
-            if ($field === 'receta_ingredients' || $field === 'receta_tools') {
-                $values = array_map('sanitize_text_field', array_filter(explode(',', $_POST[$field])));
-                update_post_meta($post_id, '_' . $field, implode(',', $values));
-            } else {
-                update_post_meta($post_id, '_' . $field, sanitize_text_field($_POST[$field]));
-            }
+            update_post_meta($post_id, '_' . $field, sanitize_text_field($_POST[$field]));
         }
+    }
+
+    if (isset($_POST['receta_ingredients'])) {
+        $ingredients = json_decode(stripslashes($_POST['receta_ingredients']), true);
+        if (is_array($ingredients)) {
+            $ingredients = array_map('sanitize_text_field', $ingredients);
+            update_post_meta($post_id, '_receta_ingredients', $ingredients);
+        }
+    } else {
+        delete_post_meta($post_id, '_receta_ingredients');
+    }
+
+    if (isset($_POST['receta_tools'])) {
+        $tools = json_decode(stripslashes($_POST['receta_tools']), true);
+        if (is_array($tools)) {
+            $tools = array_map('sanitize_text_field', $tools);
+            update_post_meta($post_id, '_receta_tools', $tools);
+        }
+    } else {
+        delete_post_meta($post_id, '_receta_tools');
     }
 }
 add_action('save_post', 'wp_recetasapunto_save_meta_box_data');
