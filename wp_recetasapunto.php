@@ -1,9 +1,13 @@
 <?php
 /*
 Plugin Name: WP Recetas a Punto
-Description: Un plugin para gestionar y mostrar recetas.
-Version: 1.0
-Author: Your Name
+Description: Un plugin para gestionar y mostrar recetas para Avada Themes.
+Version: 1.0.0
+Requires at least: 5.2 
+Requires PHP: 7.4 o superior
+Author: GonzaArts
+Author URI: https://github.com/GonzaArts/recetas_a_punto
+License URI: https://github.com/GonzaArts/recetas_a_punto?tab=GPL-2.0-1-ov-file
 Text Domain: wp_recetasapunto
 Domain Path: /languages
 */
