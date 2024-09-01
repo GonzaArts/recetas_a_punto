@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Recetas a Punto 1.0\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "Recetas"
+msgstr "Rezepte"
+
+msgid "Receta"
+msgstr "Rezept"
+
+msgid "Gestor de Recetas"
+msgstr "Rezept-Manager"
+
+msgid "Añadir Nueva"
+msgstr "Neu hinzufügen"
+
+msgid "Añadir Nueva Receta"
+msgstr "Neues Rezept hinzufügen"
+
+msgid "Nueva Receta"
+msgstr "Neues Rezept"
+
+msgid "Editar Receta"
+msgstr "Rezept bearbeiten"
+
+msgid "Ver Receta"
+msgstr "Rezept anzeigen"
+
+msgid "Todas las Recetas"
+msgstr "Alle Rezepte"
+
+msgid "Buscar Recetas"
+msgstr "Rezepte suchen"
+
+msgid "No se encontraron recetas."
+msgstr "Keine Rezepte gefunden."
+
+msgid "No se encontraron recetas en la papelera."
+msgstr "Keine Rezepte im Papierkorb gefunden."
+
+msgid "Comensales"
+msgstr "Portionen"
+
+msgid "Tiempo"
+msgstr "Zeit"
+
+msgid "Tipo de Comida"
+msgstr "Art der Nahrung"
+
+msgid "Dificultad"
+msgstr "Schwierigkeit"
+
+msgid "Baja"
+msgstr "Niedrig"
+
+msgid "Media"
+msgstr "Mittel"
+
+msgid "Alta"
+msgstr "Hoch"
+
+msgid "Ingredientes"
+msgstr "Zutaten"
+
+msgid "Utensilios"
+msgstr "Werkzeuge"

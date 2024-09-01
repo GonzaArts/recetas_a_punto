@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Recetas a Punto 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-27 12:00+0000\n"
+"PO-Revision-Date: 2024-05-27 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: wp-recetasapunto.php:10
+msgid "Recetas"
+msgstr ""
+
+#: wp-recetasapunto.php:11
+msgid "Receta"
+msgstr ""
+
+#: wp-recetasapunto.php:12
+msgid "Gestor de Recetas"
+msgstr ""
+
+#: wp-recetasapunto.php:13
+msgid "Añadir Nueva"
+msgstr ""
+
+#: wp-recetasapunto.php:14
+msgid "Añadir Nueva Receta"
+msgstr ""
+
+#: wp-recetasapunto.php:15
+msgid "Nueva Receta"
+msgstr ""
+
+#: wp-recetasapunto.php:16
+msgid "Editar Receta"
+msgstr ""
+
+#: wp-recetasapunto.php:17
+msgid "Ver Receta"
+msgstr ""
+
+#: wp-recetasapunto.php:18
+msgid "Todas las Recetas"
+msgstr ""
+
+#: wp-recetasapunto.php:19
+msgid "Buscar Recetas"
+msgstr ""
+
+#: wp-recetasapunto.php:20
+msgid "No se encontraron recetas."
+msgstr ""
+
+#: wp-recetasapunto.php:21
+msgid "No se encontraron recetas en la papelera."
+msgstr ""
+
+#: wp-recetasapunto.php:22
+msgid "Comensales"
+msgstr ""
+
+#: wp-recetasapunto.php:23
+msgid "Tiempo"
+msgstr ""
+
+#: wp-recetasapunto.php:24
+msgid "Tipo de Comida"
+msgstr ""
+
+#: wp-recetasapunto.php:25
+msgid "Dificultad"
+msgstr ""
+
+#: wp-recetasapunto.php:26
+msgid "Baja"
+msgstr ""
+
+#: wp-recetasapunto.php:27
+msgid "Media"
+msgstr ""
+
+#: wp-recetasapunto.php:28
+msgid "Alta"
+msgstr ""
+
+#: wp-recetasapunto.php:29
+msgid "Ingredientes"
+msgstr ""
+
+#: wp-recetasapunto.php:30
+msgid "Utensilios"
+msgstr ""
