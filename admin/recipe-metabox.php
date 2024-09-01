@@ -88,43 +88,52 @@ function wp_recetasapunto_meta_box_callback($post) {
 }
 
 function wp_recetasapunto_save_meta_box_data($post_id) {
+    // Verificación del nonce para seguridad
     if (!isset($_POST['wp_recetasapunto_meta_box_nonce']) || !wp_verify_nonce($_POST['wp_recetasapunto_meta_box_nonce'], 'wp_recetasapunto_save_meta_box_data')) {
         return;
     }
 
+    // Salir si es un autosave
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
         return;
     }
 
+    // Verificación de permisos del usuario
     if (!current_user_can('edit_post', $post_id)) {
         return;
     }
 
+    // Lista de campos a guardar
     $fields = array('receta_servings', 'receta_time', 'receta_type', 'receta_difficulty');
+
     foreach ($fields as $field) {
         if (isset($_POST[$field])) {
-            update_post_meta($post_id, '_' . $field, sanitize_text_field($_POST[$field]));
+            $sanitized_value = sanitize_text_field($_POST[$field]);
+            update_post_meta($post_id, '_' . $field, $sanitized_value);
         }
     }
 
+    // Guardado de ingredientes
     if (isset($_POST['receta_ingredients'])) {
         $ingredients = json_decode(stripslashes($_POST['receta_ingredients']), true);
         if (is_array($ingredients)) {
             $ingredients = array_map('sanitize_text_field', $ingredients);
-            update_post_meta($post_id, '_receta_ingredients', $ingredients);
+            update_post_meta($post_id, '_receta_ingredients', array_unique($ingredients));
         }
     } else {
         delete_post_meta($post_id, '_receta_ingredients');
     }
 
+    // Guardado de utensilios
     if (isset($_POST['receta_tools'])) {
         $tools = json_decode(stripslashes($_POST['receta_tools']), true);
         if (is_array($tools)) {
             $tools = array_map('sanitize_text_field', $tools);
-            update_post_meta($post_id, '_receta_tools', $tools);
+            update_post_meta($post_id, '_receta_tools', array_unique($tools));
         }
     } else {
         delete_post_meta($post_id, '_receta_tools');
     }
 }
+
 add_action('save_post', 'wp_recetasapunto_save_meta_box_data');
